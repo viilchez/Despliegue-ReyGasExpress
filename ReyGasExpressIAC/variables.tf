@@ -8,18 +8,22 @@ variable "bucket_name" {
   default     = "reyGasExpress-app-files-1234567890"  # Aquí puedes cambiar el nombre por uno único
 }
 
-# Cognito User Pool
+variable "aws_region" {
+  description = "Región de AWS"
+  type        = string
+  default     = "us-east-1"
+}
 
 variable "cognito_user_pool_name" {
-  description = "Nombre del User Pool de Cognito"
+  description = "Nombre del Cognito User Pool"
   type        = string
-  default     = "reyGasExpress-user-pool"
+  default     = "ReyGasExpressUserPool"
 }
 
 variable "cognito_user_pool_client_name" {
-  description = "Nombre del Cliente de Cognito"
+  description = "Nombre del Cognito User Pool Client"
   type        = string
-  default     = "reyGasExpress-client"
+  default     = "ReyGasExpressUserPoolClient"
 }
 
 # IAM
@@ -62,10 +66,4 @@ variable "api_stage_name" {
   description = "Nombre del stage para la API Gateway"
   type        = string
   default     = "dev"
-}
-
-variable "region" {
-  description = "AWS region"
-  type        = string
-  default     = "us-east-1"
 }

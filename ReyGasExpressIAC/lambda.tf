@@ -9,4 +9,10 @@ resource "aws_lambda_function" "hello_world" {
   source_code_hash = filebase64sha256("${path.module}/${var.lambda_function_zip}")
 
   role = aws_iam_role.lambda_execution_role.arn
+
+  environment {
+    variables = {
+      HELLO = "world"
+    }
+  }
 }
