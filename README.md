@@ -26,6 +26,5 @@ Este proyecto utiliza los siguientes servicios de Amazon Web Services (AWS) para
 - **S3 (Simple Storage Service):** Almacenamiento escalable para archivos estáticos y otros datos.
 - **CloudFront:** Red de entrega de contenido (CDN) para una distribución rápida y segura de activos.
 - **RDS (Relational Database Service):** Servicio de base de datos relacional para almacenar los datos de la aplicación.
-- **EC2 (Elastic Compute Cloud):** Servidores virtuales escalables en la nube (puede ser utilizado para ciertos componentes si es necesario).
 - **VPC (Virtual Private Cloud):** Red virtual privada aislada para los recursos de AWS.
 - **WAF (Web Application Firewall):** Protección contra ataques web comunes a nivel de la aplicación.
