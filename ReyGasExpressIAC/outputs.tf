@@ -1,0 +1,73 @@
+# S3 Bucket
+output "s3_bucket_name" {
+  value = aws_s3_bucket.reyGasExpress_app_files.bucket
+  description = "Nombre del bucket S3 creado"
+}
+
+# Cognito User Pool
+output "cognito_user_pool_id" {
+  value = aws_cognito_user_pool.reyGasExpress_user_pool.id
+  description = "ID del User Pool de Cognito"
+}
+
+output "cognito_user_pool_client_id" {
+  value = aws_cognito_user_pool_client.reyGasExpress_user_pool_client.id
+  description = "ID del Cliente del User Pool de Cognito"
+}
+
+# IAM
+output "lambda_execution_role_arn" {
+  value       = aws_iam_role.lambda_execution_role.arn
+  description = "ARN del rol de ejecución de Lambda"
+}
+
+# Lambda
+output "lambda_function_arn" {
+  value       = aws_lambda_function.hello_world.arn
+  description = "ARN de la función Lambda"
+}
+
+# API Gateway
+output "api_gateway_url" {
+  value       = aws_apigatewayv2_stage.reyGasExpress_api_stage.invoke_url
+  description = "URL de la API Gateway"
+}
+
+output "api_gateway_authorizer_id" {
+  description = "ID of the Cognito Authorizer in API Gateway"
+  value       = aws_apigatewayv2_authorizer.reyGasExpress_api_cognito_authorizer.id
+}
+
+# CloudWatch
+output "lambda_log_group_name" {
+  value = aws_cloudwatch_log_group.lambda_log_group.name
+}
+
+# URL para acceder a la base de datos
+output "rds_endpoint" {
+  description = "Endpoint de conexión de la base de datos"
+  value       = aws_db_instance.reyGasExpress.endpoint
+}
+
+# Salida del nombre de la base de datos
+output "rds_name" {
+  description = "Nombre de la base de datos"
+  value       = aws_db_instance.reyGasExpress.db_name
+}
+
+# Salida del nombre de usuario administrador de la base de datos
+output "rds_username" {
+  description = "Usuario administrador"
+  value       = aws_db_instance.reyGasExpress.username 
+}
+
+# CloudFront
+output "cloudfront_domain" {
+  value       = aws_cloudfront_distribution.s3_distribution.domain_name
+  description = "El nombre de dominio de la distribución de CloudFront"
+}
+
+output "cloudfront_distribution_id" {
+  value       = aws_cloudfront_distribution.s3_distribution.id
+  description = "El ID de la distribución de CloudFront"
+}
