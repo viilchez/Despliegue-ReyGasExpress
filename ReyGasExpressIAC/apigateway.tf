@@ -10,6 +10,8 @@ resource "aws_apigatewayv2_stage" "reyGasExpress_api_stage" {
   auto_deploy = true
 }
 
+
+# 2. Cognito
 resource "aws_apigatewayv2_authorizer" "reyGasExpress_api_cognito_authorizer" {
   name               = "reyGasExpress-api-cognito-authorizer"
   api_id             = aws_apigatewayv2_api.reyGasExpress_api.id
@@ -41,8 +43,6 @@ resource "aws_apigatewayv2_route" "api_route" {
   authorization_type = "JWT"
   authorizer_id      = aws_apigatewayv2_authorizer.reyGasExpress_api_cognito_authorizer.id
 }
-
-
 
 # 5. Permiso para que API Gateway invoque la Lambda
 resource "aws_lambda_permission" "api_gateway_permission" {
