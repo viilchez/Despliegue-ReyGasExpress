@@ -60,3 +60,14 @@ output "rds_username" {
   description = "Usuario administrador"
   value       = aws_db_instance.reyGasExpress.username 
 }
+
+# CloudFront
+output "cloudfront_domain" {
+  value       = aws_cloudfront_distribution.s3_distribution.domain_name
+  description = "El nombre de dominio de la distribución de CloudFront"
+}
+
+output "cloudfront_distribution_id" {
+  value       = aws_cloudfront_distribution.s3_distribution.id
+  description = "El ID de la distribución de CloudFront"
+}

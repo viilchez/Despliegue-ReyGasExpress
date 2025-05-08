@@ -6,8 +6,6 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     custom_origin_config {
       http_port               = 80
       https_port              = 443
-      http_protocol           = "http-only"
-      https_protocol          = "https-only"
       origin_protocol_policy  = "http-only"
       origin_ssl_protocols    = ["TLSv1.2"]
     }
@@ -15,11 +13,11 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
   enabled             = true
   is_ipv6_enabled     = true
-  default_root_object = "index.html"
+  default_root_object = var.cloudfront_default_root_object
 
   default_cache_behavior {
-    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
-    cached_methods   = ["GET", "HEAD"]
+    allowed_methods  = var.cloudfront_allowed_methods
+    cached_methods   = var.cloudfront_cached_methods
     target_origin_id = "S3Origin-${aws_s3_bucket.reyGasExpress_app_files.id}"
 
     forwarded_values {
@@ -27,13 +25,13 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
       cookies {
         forward = "none"
       }
-      headers = ["Origin"]
+      headers = var.cloudfront_forward_origin_headers ? ["Origin"] : []
     }
 
-    viewer_protocol_policy = "redirect-to-https"
+    viewer_protocol_policy = var.cloudfront_viewer_protocol_policy
     min_ttl                = 0
-    default_ttl            = 3600
-    max_ttl                = 86400
+    default_ttl            = var.cloudfront_default_ttl
+    max_ttl                = var.cloudfront_max_ttl
   }
 
   restrictions {
@@ -51,9 +49,4 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     aws_s3_bucket_website_configuration.website_config,
     aws_s3_bucket_policy.public_read_policy
   ]
-}
-
-output "cloudfront_domain" {
-  value       = aws_cloudfront_distribution.s3_distribution.domain_name
-  description = "El nombre de dominio de la distribución de CloudFront"
 }

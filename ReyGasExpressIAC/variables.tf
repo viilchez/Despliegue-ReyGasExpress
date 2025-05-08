@@ -111,3 +111,50 @@ variable "my_ip" {
   description = "Tu IP pública"
   default     = "179.6.166.107/32"
 }
+
+# CloudFront
+variable "cloudfront_default_root_object" {
+  description = "El objeto raíz que CloudFront solicita (normalmente index.html)"
+  type        = string
+  default     = "index.html"
+}
+
+variable "cloudfront_allowed_methods" {
+  description = "Los métodos HTTP permitidos para los visores"
+  type        = list(string)
+  default     = ["GET", "HEAD", "OPTIONS"]
+}
+
+variable "cloudfront_cached_methods" {
+  description = "Los métodos HTTP para los que CloudFront almacena en caché las respuestas"
+  type        = list(string)
+  default     = ["GET", "HEAD"]
+}
+
+variable "cloudfront_viewer_protocol_policy" {
+  description = "Política de protocolo entre el visor y CloudFront"
+  type        = string
+  default     = "redirect-to-https"
+  validation {
+    condition = contains(["allow-all", "http-only", "https-only", "redirect-to-https"], var.cloudfront_viewer_protocol_policy)
+    error_message = "El valor de cloudfront_viewer_protocol_policy debe ser uno de: allow-all, http-only, https-only, redirect-to-https."
+  }
+}
+
+variable "cloudfront_default_ttl" {
+  description = "Tiempo de vida (en segundos) predeterminado para el caché de CloudFront"
+  type        = number
+  default     = 3600
+}
+
+variable "cloudfront_max_ttl" {
+  description = "Tiempo de vida (en segundos) máximo para el caché de CloudFront"
+  type        = number
+  default     = 86400
+}
+
+variable "cloudfront_forward_origin_headers" {
+  description = "Indica si se deben reenviar los encabezados 'Origin' al origen (necesario para CORS)"
+  type        = bool
+  default     = true
+}
